@@ -1,9 +1,14 @@
-import express from 'express';
-import todosRouter from './routers/todos';
+import express from "express";
+import infoRouter from "./routers/info";
+import dotenv from "dotenv";
 
 const app = express();
 
+dotenv.config();
 app.use(express.json());
-app.use('/todos', todosRouter);
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(8000, () => console.log('Server started'));
+app.use("/info", infoRouter);
+
+const port = process.env.PORT;
+app.listen(port, () => console.log(`Server started on port ${port}...`));
